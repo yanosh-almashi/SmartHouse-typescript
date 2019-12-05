@@ -1,15 +1,17 @@
-export class CommonDevice {
+import   ICommonDevice  from './ICommonDevice';
+
+abstract  class CommonDevice implements ICommonDevice{
   protected state: boolean = false;
   constructor(protected name: string) {
     this.name = name;
     this.state = false;
   }
 
-  get deviceName(): string {
+  getName(): string {
     return this.name;
   }
 
-  set deviceName(value: string) {
+  setName(value: string) {
     if (typeof value === "string") {
       this.name = value;
     }
@@ -23,7 +25,7 @@ export class CommonDevice {
     this.state = false;
   }
 
-  get deviceState(): boolean {
+  getState(): boolean {
     return this.state;
   }
 }

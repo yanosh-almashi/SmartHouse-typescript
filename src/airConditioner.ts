@@ -28,7 +28,7 @@ export class AirConditioner extends CommonDevice {
     }
   }
 
-  get curTemperature(): number {
+  getCurTemperature(): number {
     return this.currentTemperature;
   }
 }

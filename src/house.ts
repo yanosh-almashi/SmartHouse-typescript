@@ -1,43 +1,47 @@
+import * as Collections from 'typescript-collections';
 import CoffeeMachine from './coffeeMachine';
 import AirConditioner from './airConditioner';
+import CommonDevice from './commonDevice';
+import  ICommonDevice  from './ICommonDevice';
 
-export class House {
-  protected deviceList = new Map<string, Object>();
+  class House<T extends ICommonDevice> {
+  protected deviceList = new Collections.Dictionary<string, T>();
   constructor(protected name: string) {
     this.name = name;
-    this.deviceList = new Map<string, Object>();
   }
 
-  get houseName(): string {
+  getHouseName(): string {
     return this.name;
   }
 
-  set houseName(value: string) {
+  setHouseName(value: string) {
     if (typeof value === 'string') {
       this.name = value;
     }
   }
 
   protected _isUnique(name: string): boolean {
-    return !this.deviceList.has(name);
+    return !this.deviceList.containsKey(name);
   }
 
-  protected _isInstanceOf(device: Object): boolean {
+  protected _isInstanceOf(device: T): boolean {
     return device instanceof CoffeeMachine || device instanceof AirConditioner;
   }
 
-  addDevice(device: Object): void {
-    if (this._isUnique(device.name) && this._isInstanceOf(device)) {
-      this.deviceList.set(device.name, device);
-    } else console.log(`name's already taken`);
+  addDevice(device: T): void {
+    if (this._isUnique(device.getName())) {
+      this.deviceList.setValue(device.getName(), device);
+    }
   }
 
-  get devices(): Map<string, Object> {
+  getDevices(): Collections.Dictionary<string, T> {
     return this.deviceList;
   }
 
-  getDeviceByName(name: string): Object {
-    return this.deviceList.get(name);
+  getDeviceByName(name: string): T {
+    if (this.deviceList.containsKey(name)) {
+      return this.deviceList.getValue(name);
+    }
   }
 
   onAll(): void {
@@ -57,7 +61,7 @@ export class House {
   }
 
   deleteDeviceByName(name: string):void {
-    this.deviceList.delete(name);
+    this.deviceList.remove(name);
   }
 }
 

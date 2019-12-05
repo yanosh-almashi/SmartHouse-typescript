@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "module": "commonjs",
+    "allowJs": true,
+    "target": "es6",
+    "lib": ["ES6"],
+    "downlevelIteration": true
+  }
+}

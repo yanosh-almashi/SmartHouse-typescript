@@ -1,5 +1,6 @@
 import CommonDevice from './commonDevice';
 
+
 export class CoffeeMachine extends CommonDevice {
 
   protected modes: string[]  = ['espresso', 'cappuchino', 'americano'];
@@ -12,7 +13,7 @@ export class CoffeeMachine extends CommonDevice {
     
   }
 
-  get mode(): string {
+  getMode(): string {
     return this.modes[this.currentMode];
   }
 
@@ -34,7 +35,7 @@ export class CoffeeMachine extends CommonDevice {
 
   makeCoffee(): Promise<void>  {
     if (this.state) {
-      return  new Promise((resolve, reject) => {
+      return  new Promise((resolve) => {
         const makeTime = 20 * this.power;
         setTimeout(() => {
           resolve();
@@ -46,7 +47,7 @@ export class CoffeeMachine extends CommonDevice {
     }
   }
 
-  get coffeeReady(): boolean {
+  getCoffeeReady(): boolean {
     return this.ready;
   }
 }
