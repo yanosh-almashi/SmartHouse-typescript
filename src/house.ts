@@ -19,7 +19,7 @@ import  ICommonDevice  from './ICommonDevice';
     }
   }
 
-  protected _isUnique(name: string): boolean {
+  private _isUnique(name: string): boolean {
     for (let device of this.deviceList) {
       if(device.getName() === name) {
         return false
