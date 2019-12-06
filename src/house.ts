@@ -1,11 +1,10 @@
-import * as Collections from 'typescript-collections';
 import CoffeeMachine from './coffeeMachine';
 import AirConditioner from './airConditioner';
 import CommonDevice from './commonDevice';
 import  ICommonDevice  from './ICommonDevice';
 
   class House<T extends ICommonDevice> {
-  protected deviceList = new Collections.Dictionary<string, T>();
+  protected deviceList: Array<T> = []; 
   constructor(protected name: string) {
     this.name = name;
   }
@@ -21,7 +20,12 @@ import  ICommonDevice  from './ICommonDevice';
   }
 
   protected _isUnique(name: string): boolean {
-    return !this.deviceList.containsKey(name);
+    for (let device of this.deviceList) {
+      if(device.getName() === name) {
+        return false
+      }
+    }
+    return true;
   }
 
   protected _isInstanceOf(device: T): boolean {
@@ -30,38 +34,36 @@ import  ICommonDevice  from './ICommonDevice';
 
   addDevice(device: T): void {
     if (this._isUnique(device.getName())) {
-      this.deviceList.setValue(device.getName(), device);
+      this.deviceList.push(device);
     }
   }
 
-  getDevices(): Collections.Dictionary<string, T> {
+  getDevices(): Array<T> {
     return this.deviceList;
   }
 
   getDeviceByName(name: string): T {
-    if (this.deviceList.containsKey(name)) {
-      return this.deviceList.getValue(name);
-    }
+    return this.deviceList.find(device => device.getName() === name);
   }
 
   onAll(): void {
-    for (const value of this.deviceList.values()) {
-      value.on();
-    }
+    this.deviceList.forEach(device => {
+      device.on();
+  });
   }
 
   offAll(): void {
-    for (const value of this.deviceList.values()) {
-      value.off();
-    }
+    this.deviceList.forEach(device => {
+      device.off();
+  });
   }
 
   deleteAllDevices(): void {
-    this.deviceList.clear();
+    this.deviceList = [];
   }
 
   deleteDeviceByName(name: string):void {
-    this.deviceList.remove(name);
+    this.deviceList = this.deviceList.filter(device => device.getName() !== name);
   }
 }
 
