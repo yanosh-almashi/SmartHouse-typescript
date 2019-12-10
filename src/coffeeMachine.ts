@@ -9,32 +9,36 @@ export class CoffeeMachine extends CommonDevice {
 
   constructor(protected name: string, protected power: number) {
     super(name);
-    this.power = power;
-    
   }
 
   getMode(): string {
-    return this.modes[this.currentMode];
+    if(this.getState()){
+      return this.modes[this.currentMode];
+    }
   }
 
   nextMode(): void {
-    if (this.currentMode === this.modes.length - 1) {
-      this.currentMode = 0;
-    } else {
-      this.currentMode++;
+    if(this.getState()){
+      if (this.currentMode === this.modes.length - 1) {
+        this.currentMode = 0;
+      } else {
+        this.currentMode++;
+      }
     }
   }
 
   previousMode(): void {
-    if (this.currentMode === 0) {
-      this.currentMode = this.modes.length - 1;
-    } else {
-      this.currentMode--;
+    if(this.getState()){ 
+      if (this.currentMode === 0) {
+        this.currentMode = this.modes.length - 1;
+      } else {
+        this.currentMode--;
+      }
     }
   }
 
   makeCoffee(): Promise<void>  {
-    if (this.state) {
+    if (this.getState()) {
       return  new Promise((resolve) => {
         const makeTime = 20 * this.power;
         setTimeout(() => {
@@ -42,13 +46,9 @@ export class CoffeeMachine extends CommonDevice {
         }, makeTime);
       }).then(() => {
         this.ready = true;
-        console.log(`Your ${this.modes[this.currentMode]} is ready`)
-      });
+        console.log(`Your ${this.modes[this.currentMode]} is ready`);
+      })
     }
-  }
-
-  getCoffeeReady(): boolean {
-    return this.ready;
   }
 }
 

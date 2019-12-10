@@ -3,8 +3,6 @@ import   ICommonDevice  from './ICommonDevice';
   class CommonDevice implements ICommonDevice{
   protected state: boolean = false;
   constructor(protected name: string) {
-    this.name = name;
-    this.state = false;
   }
 
   getName(): string {
@@ -12,9 +10,7 @@ import   ICommonDevice  from './ICommonDevice';
   }
 
   setName(value: string) {
-    if (typeof value === "string") {
       this.name = value;
-    }
   }
 
   on(): void {

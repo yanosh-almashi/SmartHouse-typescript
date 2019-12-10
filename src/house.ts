@@ -1,12 +1,9 @@
-import CoffeeMachine from './coffeeMachine';
-import AirConditioner from './airConditioner';
-import CommonDevice from './commonDevice';
 import  ICommonDevice  from './ICommonDevice';
 
   class House<T extends ICommonDevice> {
   protected deviceList: Array<T> = []; 
   constructor(protected name: string) {
-    this.name = name;
+  
   }
 
   getHouseName(): string {
@@ -14,9 +11,7 @@ import  ICommonDevice  from './ICommonDevice';
   }
 
   setHouseName(value: string) {
-    if (typeof value === 'string') {
-      this.name = value;
-    }
+    this.name = value;
   }
 
   private _isUnique(name: string): boolean {
@@ -28,9 +23,7 @@ import  ICommonDevice  from './ICommonDevice';
     return true;
   }
 
-  protected _isInstanceOf(device: T): boolean {
-    return device instanceof CoffeeMachine || device instanceof AirConditioner;
-  }
+ 
 
   addDevice(device: T): void {
     if (this._isUnique(device.getName())) {
