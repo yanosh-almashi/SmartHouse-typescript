@@ -1,6 +1,6 @@
 import CommonDevice from './commonDevice';
 
-export class AirConditioner extends CommonDevice {
+  class AirConditioner extends CommonDevice {
   
   protected currentTemperature: number = 20;
 

@@ -1,7 +1,7 @@
 import CommonDevice from './commonDevice';
 
 
-export class CoffeeMachine extends CommonDevice {
+  class CoffeeMachine extends CommonDevice {
 
   protected modes: string[]  = ['espresso', 'cappuchino', 'americano'];
   protected currentMode: number = 0;
