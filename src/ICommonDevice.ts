@@ -1,5 +1,4 @@
- interface ICommonDevice {
-
+interface ICommonDevice {
   getName(): string;
 
   setName(name: string): void;

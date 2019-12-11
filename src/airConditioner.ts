@@ -1,16 +1,19 @@
 import CommonDevice from './commonDevice';
 
-  class AirConditioner extends CommonDevice {
-  
-  protected currentTemperature: number = 20;
+class AirConditioner extends CommonDevice {
+  protected currentTemperature = 20;
 
-  constructor(protected name: string, protected minTemperature: number, protected maxTemperature: number, protected step: number) {
+  constructor(
+    protected name: string,
+    protected minTemperature: number,
+    protected maxTemperature: number,
+    protected step: number,
+  ) {
     super(name);
-    
   }
 
   increaseTemperature(): void {
-    if(this.getState()){
+    if (this.getState()) {
       if (this.currentTemperature + this.step > this.maxTemperature) {
         this.currentTemperature = this.maxTemperature;
       } else {
@@ -20,7 +23,7 @@ import CommonDevice from './commonDevice';
   }
 
   decreaseTemperature(): void {
-    if(this.getState()) {
+    if (this.getState()) {
       if (this.currentTemperature - this.step < this.minTemperature) {
         this.currentTemperature = this.minTemperature;
       } else {
@@ -30,10 +33,9 @@ import CommonDevice from './commonDevice';
   }
 
   getCurTemperature(): number {
-    if(this.getState()) {
+    if (this.getState()) {
       return this.currentTemperature;
     }
-   
   }
 }
 

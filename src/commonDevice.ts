@@ -1,16 +1,16 @@
-import   ICommonDevice  from './ICommonDevice';
+import ICommonDevice from './ICommonDevice';
 
-  class CommonDevice implements ICommonDevice{
-  protected state: boolean = false;
-  constructor(protected name: string) {
-  }
+class CommonDevice implements ICommonDevice {
+  protected state = false;
+
+  constructor(protected name: string) {}
 
   getName(): string {
     return this.name;
   }
 
   setName(value: string) {
-      this.name = value;
+    this.name = value;
   }
 
   on(): void {

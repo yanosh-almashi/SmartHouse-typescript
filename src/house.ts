@@ -1,32 +1,29 @@
-import  ICommonDevice  from './ICommonDevice';
+import ICommonDevice from './ICommonDevice';
 
-  class House<T extends ICommonDevice> {
-  protected deviceList: Array<T> = []; 
-  constructor(protected name: string) {
-  
-  }
+class House<T extends ICommonDevice> {
+  protected deviceList: Array<T> = [];
+
+  constructor(protected name: string) {}
 
   getHouseName(): string {
     return this.name;
   }
 
-  setHouseName(value: string) {
+  setHouseName(value: string): void {
     this.name = value;
   }
 
-  private _isUnique(name: string): boolean {
-    for (let device of this.deviceList) {
-      if(device.getName() === name) {
-        return false
+  private isUnique(name: string): boolean {
+    for (const device of this.deviceList) {
+      if (device.getName() === name) {
+        return false;
       }
     }
     return true;
   }
 
- 
-
   addDevice(device: T): void {
-    if (this._isUnique(device.getName())) {
+    if (this.isUnique(device.getName())) {
       this.deviceList.push(device);
     }
   }
@@ -36,27 +33,29 @@ import  ICommonDevice  from './ICommonDevice';
   }
 
   getDeviceByName(name: string): T {
-    return this.deviceList.find(device => device.getName() === name);
+    return this.deviceList.find((device) => device.getName() === name);
   }
 
   onAll(): void {
-    this.deviceList.forEach(device => {
+    this.deviceList.forEach((device) => {
       device.on();
-  });
+    });
   }
 
   offAll(): void {
-    this.deviceList.forEach(device => {
+    this.deviceList.forEach((device) => {
       device.off();
-  });
+    });
   }
 
   deleteAllDevices(): void {
     this.deviceList = [];
   }
 
-  deleteDeviceByName(name: string):void {
-    this.deviceList = this.deviceList.filter(device => device.getName() !== name);
+  deleteDeviceByName(name: string): void {
+    this.deviceList = this.deviceList.filter(
+      (device) => device.getName() !== name,
+    );
   }
 }
 

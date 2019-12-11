@@ -1,24 +1,24 @@
 import CommonDevice from './commonDevice';
 
+class CoffeeMachine extends CommonDevice {
+  protected modes: string[] = ['espresso', 'cappuchino', 'americano'];
 
-  class CoffeeMachine extends CommonDevice {
+  protected currentMode = 0;
 
-  protected modes: string[]  = ['espresso', 'cappuchino', 'americano'];
-  protected currentMode: number = 0;
-  protected ready: boolean = false;
+  protected ready = false;
 
   constructor(protected name: string, protected power: number) {
     super(name);
   }
 
   getMode(): string {
-    if(this.getState()){
+    if (this.getState()) {
       return this.modes[this.currentMode];
     }
   }
 
   nextMode(): void {
-    if(this.getState()){
+    if (this.getState()) {
       if (this.currentMode === this.modes.length - 1) {
         this.currentMode = 0;
       } else {
@@ -28,7 +28,7 @@ import CommonDevice from './commonDevice';
   }
 
   previousMode(): void {
-    if(this.getState()){ 
+    if (this.getState()) {
       if (this.currentMode === 0) {
         this.currentMode = this.modes.length - 1;
       } else {
@@ -37,9 +37,9 @@ import CommonDevice from './commonDevice';
     }
   }
 
-  makeCoffee(): Promise<void>  {
+  makeCoffee(): Promise<void> {
     if (this.getState()) {
-      return  new Promise((resolve) => {
+      return new Promise((resolve) => {
         const makeTime = 20 * this.power;
         setTimeout(() => {
           resolve();
@@ -47,9 +47,9 @@ import CommonDevice from './commonDevice';
       }).then(() => {
         this.ready = true;
         console.log(`Your ${this.modes[this.currentMode]} is ready`);
-      })
+      });
     }
   }
 }
 
-export default  CoffeeMachine;
+export default CoffeeMachine;
